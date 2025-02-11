@@ -19,6 +19,7 @@ const quotes =
     'The little things are infinitely the most important.',
     'It is not my intention to be fulsome, but I confess that I covet your skull.',
 ];
+
 // stocker la liste de mots et l'index du mot que le joueur est en train de taper
 let words = []; //let = variable disponible uniquement dans le bloc et après sa déclaration
 let wordIndex = 0;
@@ -58,3 +59,44 @@ document.getElementById('start').addEventListener('click', () =>
     //lancement du chronomètre
     startTime = new Date().getTime();
 });
+
+//Vérifie que le joueur tape sur son clavier et met à jour le jeu en conséquence
+typedValueElement.addEventListener('input', ( )=> 
+{
+    //obtenir le mot actuel
+    const currentWord = words[wordIndex];
+    //obtenir la valeur actuelle
+    const typedValue = typedValueElement.value;
+
+    if (typedValue=== currentWord && wordIndex === words.length - 1)
+    {
+        //affiche succès
+        const elapsedTime = new Date().getTime() - startTime;
+        const message = `BRAVOO !!! You finished in ${elapsedTime / 1000} seconds.`
+        messageElement.innerText = message; 
+    }
+    else if (typedValue.endWith('') && typedValue.trim() === currentWord) 
+    {
+        //fin du mot 
+        //efface le typedValueElement pour le nouveau mot 
+        typedValueElement = '';
+        //passe au mot suivant
+        wordIndex++;
+        //rénitialiser le nom de classe pour tout les éléments entre guillemets
+        for (const wordElement of quoteElement.childNodes) 
+        {
+            wordElement.className = '';
+        }
+        //mise en évidence du nouveau mot
+        quoteElement.childNodes[wordIndex].className = 'highlight';
+        // actuellement correct
+    // surligner le mot suivant
+    typedValueElement.className = '';
+    }
+    else 
+    {
+        // état d'erreur
+        typedValueElement.className = 'error';
+    }
+    }
+);
