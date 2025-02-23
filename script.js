@@ -28,16 +28,17 @@ let startTime = Date.now();
 // éléments de page
 const quoteElement = document.getElementById('quote'); //Constantes 
 const messageElement = document.getElementById('message');
-const typedValueElement = document.getElementById('typed-value');
+const typedValueElement = document.getElementById('typed-value'); 
 
 //Quand le joueur clique sur start le jeu débute
 document.getElementById('start').addEventListener('click', () =>
 {
+    //window.location.href = "index.html";
     //Obtenir une citation aléatoire
     const quoteIndex = Math.floor(Math.random() * quotes.length);
     const quote = quotes[quoteIndex];
     //Mettre la citation dans un tableau de mots 
-    words = quote.split('');
+    words = quote.split(' ');
     //Rénitialiser l'index des mots pour le suivi
     wordIndex = 0;
 
@@ -61,42 +62,42 @@ document.getElementById('start').addEventListener('click', () =>
 });
 
 //Vérifie que le joueur tape sur son clavier et met à jour le jeu en conséquence
-typedValueElement.addEventListener('input', ( )=> 
-{
-    //obtenir le mot actuel
-    const currentWord = words[wordIndex];
-    //obtenir la valeur actuelle
-    const typedValue = typedValueElement.value;
-
-    if (typedValue=== currentWord && wordIndex === words.length - 1)
+typedValueElement.addEventListener('input', ()=> 
     {
-        //affiche succès
-        const elapsedTime = new Date().getTime() - startTime;
-        const message = `BRAVOO !!! You finished in ${elapsedTime / 1000} seconds.`
-        messageElement.innerText = message; 
-    }
-    else if (typedValue.endWith('') && typedValue.trim() === currentWord) 
-    {
-        //fin du mot 
-        //efface le typedValueElement pour le nouveau mot 
-        typedValueElement = '';
-        //passe au mot suivant
-        wordIndex++;
-        //rénitialiser le nom de classe pour tout les éléments entre guillemets
-        for (const wordElement of quoteElement.childNodes) 
+        //obtenir le mot actuel
+        const currentWord = words[wordIndex];
+        //obtenir la valeur du mot actuel
+        const typedValue = typedValueElement.value;
+    
+        if (typedValue=== currentWord && wordIndex === words.length - 1)
         {
-            wordElement.className = '';
+            //affiche succès
+            const elapsedTime = new Date().getTime() - startTime;
+            const message = `BRAVOO !!! You finished in ${elapsedTime / 1000} seconds.`
+            messageElement.innerText = message; 
         }
-        //mise en évidence du nouveau mot
-        quoteElement.childNodes[wordIndex].className = 'highlight';
-        // actuellement correct
-    // surligner le mot suivant
-    typedValueElement.className = '';
-    }
-    else 
-    {
-        // état d'erreur
-        typedValueElement.className = 'error';
-    }
-    }
-);
+        else if (typedValue.endWith('') && typedValue.trim() === currentWord) 
+        {
+            //fin du mot 
+            //efface le typedValueElement pour le nouveau mot 
+            typedValueElement = '';
+            //passe au mot suivant
+            wordIndex++;
+            //rénitialiser le nom de classe pour tout les éléments entre guillemets
+            for (const wordElement of quoteElement.childNodes) 
+            {
+                wordElement.className = '';
+            }
+            //mise en évidence du nouveau mot
+            quoteElement.childNodes[wordIndex].className = 'highlight';
+            // actuellement correct
+        // surligner le mot suivant
+        typedValueElement.className = '';
+        }
+        else 
+        {
+            // état d'erreur
+            typedValueElement.className = 'error';
+        }
+        }
+    );
