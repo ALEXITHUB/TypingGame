@@ -26,13 +26,16 @@ let words = []; //let = variable disponible uniquement dans le bloc et après sa
 let wordIndex = 0;
 // l'heure de début
 let startTime = Date.now();
+let timerInterval;
 
 //éléments de page
 const quoteElement = document.getElementById('quote'); //Constantes
 const messageElement = document.getElementById('message')
 const typedValueElement = document.getElementById('typed-value');
+
 //Quand le joueur clique sur start le jeu débute
 document.getElementById('start').addEventListener('click', function () {
+	startTimer();
 	 //Obtenir une citation aléatoire
 	const quoteIndex = Math.floor(Math.random() * quotes.length);
 	const quote = quotes[quoteIndex];
@@ -64,6 +67,21 @@ document.getElementById('start').addEventListener('click', function () {
 	this.style.display = "none";
 });
 
+//Chronomètre
+function startTimer() {
+    startTime = Date.now(); // Capture l'heure de début
+    timerInterval = setInterval(updateTimer, 1000); // Met à jour toutes les secondes
+}
+
+function updateTimer() {
+    let elapsedTime = Math.floor((Date.now() - startTime) / 1000); // Temps en secondes
+    document.getElementById("timer").innerText = elapsedTime; // Met à jour l'affichage
+}
+
+function stopTimer() {
+    clearInterval(timerInterval); // Arrête le timer
+}
+
 //Vérifie que le joueur tape sur son clavier et met à jour le jeu en conséquence
 typedValueElement.addEventListener('input', (e) => {
 	// Obtenir le mot actuel
@@ -73,6 +91,7 @@ typedValueElement.addEventListener('input', (e) => {
 
 	if (typedValue === currentWord && wordIndex === words.length - 1) {
 		//affiche succès
+		stopTimer();
 		const elapsedTime = new Date().getTime() - startTime;
 		const message = `CONGRATULATIONS! You finished in ${elapsedTime / 1000} seconds.`;
 		messageElement.innerText = message;
@@ -102,3 +121,5 @@ document.getElementById('quit').addEventListener('click', () =>
 {
 	window.location.href= "./Accueil.html";
 });
+
+
