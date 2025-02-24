@@ -22,82 +22,83 @@ const quotes =
 
 // stocker la liste de mots et l'index du mot que le joueur est en train de taper
 let words = []; //let = variable disponible uniquement dans le bloc et après sa déclaration
+// stocke l'index du mot que le joueur est en train de taper.
 let wordIndex = 0;
 // l'heure de début
 let startTime = Date.now();
-// éléments de page
-const quoteElement = document.getElementById('quote'); //Constantes 
-const messageElement = document.getElementById('message');
-const typedValueElement = document.getElementById('typed-value'); 
 
+//éléments de page
+const quoteElement = document.getElementById('quote'); //Constantes
+const messageElement = document.getElementById('message')
+const typedValueElement = document.getElementById('typed-value');
 //Quand le joueur clique sur start le jeu débute
-document.getElementById('start').addEventListener('click', () =>
-{
-    //window.location.href = "index.html";
-    //Obtenir une citation aléatoire
-    const quoteIndex = Math.floor(Math.random() * quotes.length);
-    const quote = quotes[quoteIndex];
-    //Mettre la citation dans un tableau de mots 
-    words = quote.split(' ');
-    //Rénitialiser l'index des mots pour le suivi
-    wordIndex = 0;
+document.getElementById('start').addEventListener('click', function () {
+	 //Obtenir une citation aléatoire
+	const quoteIndex = Math.floor(Math.random() * quotes.length);
+	const quote = quotes[quoteIndex];
+	//Mettre la citation dans un tableau de mots 
+	words = quote.split(' ');
+	//Rénitialiser l'index des mots pour le suivi
+	wordIndex = 0;
 
-    //MàJ de l'interface
+	//MàJ de l'interface
     // Crée un tableau d'éléments "span" afin que nous puissions définir une classe
-    const spanWords = words.map(function(word) { return `<span>${word} </span>`});
-    // Convertir en chaîne et définir comme innerHTML sur l'affichage de la citation
-    quoteElement.innerHTML = spanWords.join('');
-    // Met en surbrillance le premier mot
-    quoteElement.childNodes[0].className = 'highlight';
-    // Effacer tous les messages précédents
-    messageElement.innerText = '';
+	const spanWords = words.map(function(word) { return `<span>${word} </span>`});
+	// Convertir en chaîne et définir comme innerHTML sur l'affichage de la citation
+	quoteElement.innerHTML = spanWords.join('');
+	// Met en surbrillance le premier mot
+	quoteElement.childNodes[0].className = 'highlight';
+	// Effacer tous les messages précédents
+	messageElement.innerText = '';
 
-    //Configuration de la zone de texte
-    //Efface la zone de texte
-    typedValueElement.value='';
-    //défini le focus
-    typedValueElement.focus();
-    //lancement du chronomètre
-    startTime = new Date().getTime();
+	//Configuration de la zone de texte
+	//Efface la zone de texte
+	typedValueElement.value = '';
+	// défini le focus
+	typedValueElement.focus();
+
+	// commence le timer
+	startTime = new Date().getTime();
+
+	//Cache le bouton
+	this.style.display = "none";
 });
 
 //Vérifie que le joueur tape sur son clavier et met à jour le jeu en conséquence
-typedValueElement.addEventListener('input', ()=> 
-    {
-        //obtenir le mot actuel
-        const currentWord = words[wordIndex];
-        //obtenir la valeur du mot actuel
-        const typedValue = typedValueElement.value;
-    
-        if (typedValue=== currentWord && wordIndex === words.length - 1)
-        {
-            //affiche succès
-            const elapsedTime = new Date().getTime() - startTime;
-            const message = `BRAVOO !!! You finished in ${elapsedTime / 1000} seconds.`
-            messageElement.innerText = message; 
-        }
-        else if (typedValue.endWith('') && typedValue.trim() === currentWord) 
-        {
-            //fin du mot 
+typedValueElement.addEventListener('input', (e) => {
+	// Obtenir le mot actuel
+	const currentWord = words[wordIndex];
+	// obtenir la valeur du mot actuel
+	const typedValue = typedValueElement.value;
+
+	if (typedValue === currentWord && wordIndex === words.length - 1) {
+		//affiche succès
+		const elapsedTime = new Date().getTime() - startTime;
+		const message = `CONGRATULATIONS! You finished in ${elapsedTime / 1000} seconds.`;
+		messageElement.innerText = message;
+	} else if (typedValue.endsWith(' ') && typedValue.trim() === currentWord) {
+		//fin du mot 
             //efface le typedValueElement pour le nouveau mot 
-            typedValueElement = '';
-            //passe au mot suivant
-            wordIndex++;
-            //rénitialiser le nom de classe pour tout les éléments entre guillemets
-            for (const wordElement of quoteElement.childNodes) 
-            {
-                wordElement.className = '';
-            }
-            //mise en évidence du nouveau mot
-            quoteElement.childNodes[wordIndex].className = 'highlight';
-            // actuellement correct
+		typedValueElement.value = '';
+		// passe au mot suivant
+		wordIndex++;
+		//rénitialiser le nom de classe pour tout les éléments entre guillemets
+		for (const wordElement of quoteElement.childNodes) {
+			wordElement.className = '';
+		}
+		//mise en évidence du nouveau mot
+		quoteElement.childNodes[wordIndex].className = 'highlight';
+	} else if (currentWord.startsWith(typedValue)) {
+		// actuellement correct
         // surligner le mot suivant
-        typedValueElement.className = '';
-        }
-        else 
-        {
-            // état d'erreur
-            typedValueElement.className = 'error';
-        }
-        }
-    );
+		typedValueElement.className = '';
+	} else {
+		// error 
+		typedValueElement.className = 'error';
+	}
+});
+//Retourner à l'écran d'accueil
+document.getElementById('quit').addEventListener('click', () =>
+{
+	window.location.href= "./Accueil.html";
+});
