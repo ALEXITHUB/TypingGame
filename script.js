@@ -27,17 +27,21 @@ let wordIndex = 0;
 // l'heure de début
 let startTime = Date.now();
 let timerInterval;
+let quoteIndex = 0;
 
 //éléments de page
 const quoteElement = document.getElementById('quote'); //Constantes
 const messageElement = document.getElementById('message')
 const typedValueElement = document.getElementById('typed-value');
 
+//Cache le bouton restart
+document.getElementById('restart').style.display = 'none'
+
 //Quand le joueur clique sur start le jeu débute
 document.getElementById('start').addEventListener('click', function () {
 	startTimer();
 	 //Obtenir une citation aléatoire
-	const quoteIndex = Math.floor(Math.random() * quotes.length);
+	quoteIndex = Math.floor(Math.random() * quotes.length);
 	const quote = quotes[quoteIndex];
 	//Mettre la citation dans un tableau de mots 
 	words = quote.split(' ');
@@ -65,7 +69,13 @@ document.getElementById('start').addEventListener('click', function () {
 
 	//Cache le bouton
 	this.style.display = "none";
+
+	//Dévoile le bouton restart
+	document.getElementById('restart').style.display = '';
+
 });
+
+
 
 //Chronomètre
 function startTimer() {
@@ -122,7 +132,7 @@ document.getElementById('reset').addEventListener('click',() =>
 {
 	startTimer();
 	 //Obtenir une citation aléatoire
-	const quoteIndex = Math.floor(Math.random() * quotes.length);
+	quoteIndex = Math.floor(Math.random() * quotes.length);
 	const quote = quotes[quoteIndex];
 	//Mettre la citation dans un tableau de mots 
 	words = quote.split(' ');
@@ -148,6 +158,36 @@ document.getElementById('reset').addEventListener('click',() =>
 	// commence le timer
 	startTime = new Date().getTime();
 });
+
+//Recommence la partie avec le même mot 
+document.getElementById('restart').addEventListener('click', () =>
+{
+	//Obtenir la même citation
+	const quote = quotes[quoteIndex];
+	//Mettre la citation dans un tableau de mots
+	words = quote.split(' ');
+	//Rénitialiser l'index des mots pour le suivi
+	wordIndex = 0;
+
+	//MàJ de l'interface
+    // Crée un tableau d'éléments "span" afin que nous puissions définir une classe
+	const spanWords = words.map(function(word) { return `<span>${word} </span>`});
+	// Convertir en chaîne et définir comme innerHTML sur l'affichage de la citation
+	quoteElement.innerHTML = spanWords.join('');
+	// Met en surbrillance le premier mot
+	quoteElement.childNodes[0].className = 'highlight';
+	// Effacer tous les messages précédents
+	messageElement.innerText = '';
+
+	//Configuration de la zone de texte
+	//Efface la zone de texte
+	typedValueElement.value = '';
+	// défini le focus
+	typedValueElement.focus();
+
+	// commence le timer
+	startTime = new Date().getTime();
+})
 
 //Retourner à l'écran d'accueil
 document.getElementById('quit').addEventListener('click', () =>

@@ -8,14 +8,15 @@
 </head>
 <body>
     <h1>Typing game!</h1>
-  <p>Practice your typing skills with a quote from Sherlock Holmes. Click **start** to begin!</p>
+  <p>Click **START** to get a random quote</p>
   <p id="quote"></p> <!-- Ceci affichera la citation -->
   <p id="message"></p> <!-- Ceci affichera chaque messages d'état -->
   <div>
     <input type="text" aria-label="current word" id="typed-value" /> <!-- La zone de texte pour la saisie -->
     <button type="button" id="start">Start</button> <!-- Pour commencer le jeu -->
-    <button type="reset" id="reset">reset</button> <!--Recommence une partie -->
-    <button type="button" id="quit">leave the game</button> <!-- retourne sur l'écran d'accueil-->
+    <button type="reset" id="reset">Reset</button> <!--Recommence une partie -->
+    <button type="button" id="restart">Restart</button> <!--Recommence la phrase-->
+    <button type="button" id="quit">Leave the game</button> <!-- retourne sur l'écran d'accueil-->
     <p><span id="timer">0</span> seconds</p>
   </div>
   <script src="script.js"></script>
