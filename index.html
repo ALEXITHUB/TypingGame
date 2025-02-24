@@ -4,23 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main</title>
-    <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./style.css">
 
 </head>
 <body>
     <h1>Typing game!</h1>
-  <p>Click **START** to get a random quote</p>
-  <p id="quote"></p> <!-- Ceci affichera la citation -->
-  <p id="message"></p> <!-- Ceci affichera chaque messages d'état -->
-  <div>
-    <input type="text" aria-label="current word" id="typed-value" /> <!-- La zone de texte pour la saisie -->
-    <button type="button" id="start">Start</button> <!-- Pour commencer le jeu -->
-    <button type="reset" id="reset">Reset</button> <!--Recommence une partie -->
-    <button type="button" id="restart">Restart</button> <!--Recommence la phrase-->
-    <button type="button" id="quit">Leave the game</button> <!-- retourne sur l'écran d'accueil-->
-    <p><span id="timer">0</span> seconds</p>
+
+  <div class="container" id="instruction">
+    <p>Click <b>START</b> to get a random quote</p>
   </div>
+
+  <div class="container" id="quotes" >
+    <p id="quote"></p> <!-- Ceci affichera la citation -->
+    <p id="message"></p> <!-- Ceci affichera chaque messages d'état -->
+  </div>
+
+  <div class="container">
+    <p>Timer : <span id="timer"></span></p>
+  </div>
+  
+  <div class="container" id="textzone">
+    <input type="text" aria-label="current word" id="typed-value" /> <!-- La zone de texte pour la saisie -->
+  </div>
+
+  <div class="container text-center mt-4">
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <button type="button" id="start" class="btn btn-outline-dark px-4">Start</button>
+        </div>
+        <div class="col-auto">
+          <button type="button" id="restart" class="btn btn-outline-dark px-4">Restart</button>
+      </div>
+        <div class="col-auto">
+            <button type="reset" id="reset" class="btn btn-outline-dark px-4">Reset</button>
+        </div>
+        <div class="col-auto">
+            <button type="button" id="quit" class="btn btn-outline-dark px-4">Leave the game</button>
+        </div>
+    </div>
+</div>
+
+  
   <script src="script.js"></script>
 </body>
 </html>

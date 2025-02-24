@@ -1,9 +1,28 @@
+h1{
+  text-align: center;
+  margin-top: 10%;
+  font-family: Comic Sans MS, Comic Sans, cursive;
+  font-size: 35px;
+}
+
+p{
+  font-family: Arial Narrow, sans-serif;
+  font-size: 20px;
+}
+
+body{
+  background-color: #6495ed;
+}
 
 .highlight {
-    background-color: yellow;
+    background-color: #C2EABA;
   }
   
-  .error {
+.error {
     background-color: lightcoral;
     border: red;
-  }
+}
+
+.container{
+  text-align: center;
+}
