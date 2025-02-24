@@ -1,5 +1,5 @@
 //renvoie sur la page du jeu
-document.getElementById('start').addEventListener('click', () => 
+document.getElementById('play').addEventListener('click', () => 
 {
     window.location.href= "./index.html" ;
 

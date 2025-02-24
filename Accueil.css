@@ -1,0 +1,38 @@
+h1{
+    text-align: center;
+    margin-top: 10%;
+    font-family: Comic Sans MS, Comic Sans, cursive;
+    font-size: 35px;
+}
+p{
+    font-family: Arial Narrow, sans-serif;
+    font-size: 20px;
+}
+body{
+    background-color: #6495ed;
+}
+
+.container {
+    width: 33.33%; /* Un tiers de la largeur de l'écran */
+    margin: 0 auto; /* Centre horizontalement */
+    text-align: center;
+    padding: 15px; /* Ajoute un peu d'espace intérieur */
+    border: 2px solid black; /* Juste pour voir les limites du container */
+    border-radius: 10px; /* Coins arrondis */
+    background-color: #F3EAF4; /* Fond léger pour démarquer */
+    margin-top: 5%;
+}
+
+#play{
+    font-size: 24px;
+    padding: 20px 40px;
+    background-color: #007bff;
+    color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border-radius: 10px; 
+    cursor: pointer; /* Curseur interactif */
+    display: block; /* Permet de centrer avec margin auto */
+    margin: 50px auto; /* Centre horizontalement */
+    width: 150px;
+    text-align: center;
+}
