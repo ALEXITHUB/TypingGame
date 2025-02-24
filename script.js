@@ -27,7 +27,10 @@ let wordIndex = 0;
 // l'heure de début
 let startTime = Date.now();
 let timerInterval;
+//Stocke la valeur de la citation
 let quoteIndex = 0;
+//Stocke le nombre d'erreurs
+let nberror = 0;
 
 //éléments de page
 const quoteElement = document.getElementById('quote'); //Constantes
@@ -103,8 +106,17 @@ typedValueElement.addEventListener('input', (e) => {
 		//affiche succès
 		stopTimer();
 		const elapsedTime = new Date().getTime() - startTime;
-		const message = `CONGRATULATIONS! You finished in ${elapsedTime / 1000} seconds.`;
+		if(nberror==0) 
+			{
+				const message = `CONGRATULATIONS! You finished in ${elapsedTime / 1000} seconds without ANY mistakes !!` ;
+				messageElement.innerText = message;
+			}
+		else
+		{
+			const message = `CONGRATULATIONS! You finished in ${elapsedTime / 1000} seconds with ${nberror} error(s)` ;
 		messageElement.innerText = message;
+		}
+		
 	} else if (typedValue.endsWith(' ') && typedValue.trim() === currentWord) {
 		//fin du mot 
             //efface le typedValueElement pour le nouveau mot 
@@ -124,6 +136,7 @@ typedValueElement.addEventListener('input', (e) => {
 	} else {
 		// error 
 		typedValueElement.className = 'error';
+		nberror++;
 	}
 });
 
@@ -157,6 +170,8 @@ document.getElementById('reset').addEventListener('click',() =>
 
 	// commence le timer
 	startTime = new Date().getTime();
+	//Rénitialise le nombre d'erreurs
+	nberror = 0;
 });
 
 //Recommence la partie avec le même mot 
@@ -187,6 +202,7 @@ document.getElementById('restart').addEventListener('click', () =>
 
 	// commence le timer
 	startTime = new Date().getTime();
+	nberror = 0;
 })
 
 //Retourner à l'écran d'accueil
