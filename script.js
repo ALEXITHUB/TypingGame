@@ -214,7 +214,7 @@ document.getElementById('restart').addEventListener('click', () =>
 //Retourner à l'écran d'accueil
 document.getElementById('quit').addEventListener('click', () =>
 {
-	window.location.href= "./Accueil.html";
+	window.location.href= "./index.html";
 });
 
 
