@@ -38,10 +38,16 @@ const messageElement = document.getElementById('message')
 const typedValueElement = document.getElementById('typed-value');
 
 //Cache le bouton restart
-document.getElementById('restart').style.display = 'none'
+document.getElementById('restart').style.display = 'none';
 
 //Cache le bouton reset
-document.getElementById('reset').style.display = 'none'
+document.getElementById('reset').style.display = 'none';
+
+//Cache la typebox
+document.getElementById('typed-value').style.display = 'none';
+
+//Cache le timer
+document.getElementById('displayTimer').style.display = 'none';
 
 //Quand le joueur clique sur start le jeu débute
 document.getElementById('start').addEventListener('click', function () {
@@ -82,6 +88,12 @@ document.getElementById('start').addEventListener('click', function () {
 	//Dévoile le bouton reset
 	document.getElementById('reset').style.display = '';
 
+	//Dévoile la typebox
+	document.getElementById('typed-value').style.display = '';
+
+	//Dévoile le timer
+	document.getElementById('displayTimer').style.display = '';
+
 });
 
 
@@ -111,6 +123,8 @@ typedValueElement.addEventListener('input', (e) => {
 	if (typedValue === currentWord && wordIndex === words.length - 1) {
 		//affiche succès
 		stopTimer();
+		//Dévoile le timer
+		document.getElementById('displayTimer').style.display = 'none';
 		const elapsedTime = new Date().getTime() - startTime;
 		if(nberror==0) 
 			{
