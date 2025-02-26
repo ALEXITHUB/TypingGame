@@ -40,6 +40,9 @@ const typedValueElement = document.getElementById('typed-value');
 //Cache le bouton restart
 document.getElementById('restart').style.display = 'none'
 
+//Cache le bouton reset
+document.getElementById('reset').style.display = 'none'
+
 //Quand le joueur clique sur start le jeu débute
 document.getElementById('start').addEventListener('click', function () {
 	startTimer();
@@ -75,6 +78,9 @@ document.getElementById('start').addEventListener('click', function () {
 
 	//Dévoile le bouton restart
 	document.getElementById('restart').style.display = '';
+
+	//Dévoile le bouton reset
+	document.getElementById('reset').style.display = '';
 
 });
 
